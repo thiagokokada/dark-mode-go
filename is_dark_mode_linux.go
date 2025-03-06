@@ -8,8 +8,6 @@ import (
 
 const dbusMethod = "org.freedesktop.portal.Settings.Read"
 
-var dbusArgs = []string{"org.freedesktop.appearance", "color-scheme"}
-
 func IsDarkMode() (bool, error) {
 	conn, err := dbus.SessionBus()
 	if err != nil {
@@ -22,7 +20,7 @@ func IsDarkMode() (bool, error) {
 		"/org/freedesktop/portal/desktop",
 	)
 	var colorScheme uint32
-	err = obj.Call(dbusMethod, 0, dbusArgs).Store(&colorScheme)
+	err = obj.Call(dbusMethod, 0, "org.freedesktop.appearance", "color-scheme").Store(&colorScheme)
 	if err != nil {
 		return false, fmt.Errorf("%w: dbus method '%s' call: %w", OsError, dbusMethod, err)
 	}
