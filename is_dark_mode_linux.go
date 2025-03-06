@@ -7,6 +7,7 @@ import (
 )
 
 const dbusMethod = "org.freedesktop.portal.Settings.Read"
+
 var dbusArgs = []string{"org.freedesktop.appearance", "color-scheme"}
 
 func IsDarkMode() (bool, error) {
